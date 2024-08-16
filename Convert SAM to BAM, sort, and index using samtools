@@ -1,0 +1,17 @@
+# Step 4: Convert SAM to BAM, sort, and index using samtools
+echo "Processing BAM files..."
+
+# Check if samtools is installed
+if command -v samtools &> /dev/null
+then
+    for samfile in $OUTPUT_DIR/aligned_reads/*.sam
+    do
+        base=$(basename $samfile ".sam")
+        if samtools view -Sb $samfile | samtools sort -o $OUTPUT_DIR/aligned_reads/${base}.sorted.bam; then
+            samtools index $OUTPUT_DIR/aligned_reads/${base}.sorted.bam
+        else
+            echo "Failed to process ${samfile} with samtools."
+        fi
+    done
+else
+    echo "Error: samtools is not installed or not found in your PATH."
