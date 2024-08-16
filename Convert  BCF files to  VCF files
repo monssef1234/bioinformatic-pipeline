@@ -1,0 +1,7 @@
+#Step 6: Convert  BCF files to  VCF files
+echo "Converting BCF to VCF..."
+for bcf_file in $OUTPUT_DIR/variants/*.bcf
+do
+    base=$(basename $bcf_file ".bcf")
+    bcftools view $bcf_file > $OUTPUT_DIR/variants/${base}.vcf
+done
