@@ -1,0 +1,20 @@
+echo "Running BWA alignment..."
+mkdir -p $OUTPUT_DIR/aligned_reads
+for file in $OUTPUT_DIR/trimmed_reads/*1_val_1.fq
+do
+    base=$(basename $file "1_val_1.fq")
+    pair_file="${OUTPUT_DIR}/trimmed_reads/${base}2_val_2.fq"
+
+    # Debugging output
+    echo "Aligning ${file} and ${pair_file}"
+    echo "Reference genome: $REFERENCE_GENOME"
+    echo "Checking existence of index files..."
+    ls /home/monssef/new_genome/
+
+    if [ -f "$pair_file" ]; then
+        echo "Aligning ${file} and ${pair_file}"
+        bwa mem -t $THREADS $REFERENCE_GENOME $file $pair_file > $OUTPUT_DIR/aligned_reads/${base}.sam
+    else
+        echo "Paired file ${pair_file} not found for ${file}. Skipping."
+    fi
+done
