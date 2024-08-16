@@ -1,0 +1,9 @@
+# Step 5: Variant Calling using bcftools
+echo "Running variant calling with bcftools..."
+mkdir -p $OUTPUT_DIR/variants
+for bamfile in $OUTPUT_DIR/aligned_reads/*.sorted.bam
+do
+    base=$(basename $bamfile ".sorted.bam")
+    bcftools mpileup -Ou -f $REFERENCE_GENOME $bamfile | bcftools call -mv -Ob -o $OUTPUT_DIR/variants/${base}.bcf
+    bcftools index $OUTPUT_DIR/variants/${base}.bcf
+done
