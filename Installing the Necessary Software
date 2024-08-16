@@ -1,0 +1,29 @@
+FastQC: 
+
+sudo apt-get install fastqc
+
+TrimGalore: 
+
+sudo apt-get install trim-galore
+
+BWA:
+
+sudo apt-get install bwa
+bwa index /home/user/genome/Homo_sapiens_assembly38.fasta
+
+Samtools: 
+
+sudo apt-get install samtools
+
+Bcftools: 
+
+sudo apt-get install bcftools
+
+SnpEff :
+
+wget http://snpeff.sourceforge.net/snpEff_latest_core.zip
+unzip snpEff_latest_core.zip -d /path/to/your/directory
+
+
+
+
