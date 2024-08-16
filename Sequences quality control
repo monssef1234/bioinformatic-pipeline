@@ -1,0 +1,6 @@
+echo "Running FastQC..."
+mkdir -p $OUTPUT_DIR/fastqc_results
+for file in $FASTQ_DIR/*.fq
+do
+    fastqc -t $THREADS -o $OUTPUT_DIR/fastqc_results $file
+done
