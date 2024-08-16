@@ -1,0 +1,8 @@
+# Step 7: Annotation of variants using SnpEff
+echo "Running variant annotation with SnpEff..."
+mkdir -p $OUTPUT_DIR/annotated_variants
+for vcf_file in $OUTPUT_DIR/variants/*.vcf
+do
+    base=$(basename $vcf_file ".vcf")
+    java -jar $SNPEFF_PATH -v GRCh38.86 $vcf_file > $OUTPUT_DIR/annotated_variants/${base}.annotated.vcf
+done
