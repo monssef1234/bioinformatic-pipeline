@@ -1,0 +1,12 @@
+echo "Running TrimGalore..."
+mkdir -p $OUTPUT_DIR/trimmed_reads
+for file in $FASTQ_DIR/*_1.fq
+do
+    base=$(basename $file "_1.fq")
+    pair_file="$FASTQ_DIR/${base}_2.fq"
+    if [ -f "$pair_file" ]; then
+        trim_galore --paired --fastqc -o $OUTPUT_DIR/trimmed_reads $file $pair_file
+    else
+        echo "No paired file found for $file. Skipping."
+    fi
+done
